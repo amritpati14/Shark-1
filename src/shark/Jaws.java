@@ -19,7 +19,7 @@ public class Jaws {
     
     
     public Jaws(Direction direction, Grid grid, MoveValidatorIntf validator){
-        this.direction = direction;
+        this.diection = direction;
         this.grid = grid;
         this.validator = validator;
         
