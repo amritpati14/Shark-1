@@ -7,9 +7,10 @@ package shark;
 
 import environment.Environment;
 import grid.Grid;
-//import images.ResourceTools;
+import images.ResourceTools;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -24,102 +25,107 @@ class Amity extends Environment implements CellDataProviderIntf, MoveValidatorIn
     private Grid grid;
     private Jaws jaws;
     private ArrayList<Barrier> barriers;
-//    public Background background;
-    
+    private ArrayList<Item> items;
+
     public Amity() {
         
-        grid = new Grid(25, 20, 20, 20, new Point (180, 80), Color.black);
+        this.setBackground(ResourceTools.loadImageFromResource("shark/backgroundshark.jpg").getScaledInstance(900, 600, Image.SCALE_SMOOTH));
+        
+        grid = new Grid(25, 20, 27, 27, new Point (80, 10), Color.black);
         
         jaws = new Jaws(Direction.RIGHT, grid, this);
-        
+       
+        items = new ArrayList<>();
+//        items.add(new Item(4, 5, true, Item.Item_Type_Drowning_Person , this, this)); GIVE THIS IMAGE
+         
 //<editor-fold defaultstate="collapsed" desc="so many barriers">
-        barriers = new ArrayList<>();
-        barriers.add(new Barrier(0, 0, Color.magenta, this));
-        barriers.add(new Barrier(0, 1, Color.magenta, this));
-        barriers.add(new Barrier(0, 2, Color.magenta, this));
-        barriers.add(new Barrier(0, 3, Color.magenta, this));
-        barriers.add(new Barrier(0, 4, Color.magenta, this));
-        barriers.add(new Barrier(0, 5, Color.magenta, this));
-        barriers.add(new Barrier(0, 6, Color.magenta, this));
-        barriers.add(new Barrier(0, 7, Color.magenta, this));
-        barriers.add(new Barrier(0, 8, Color.magenta, this));
-        barriers.add(new Barrier(0, 9, Color.magenta, this));
-        barriers.add(new Barrier(0, 10, Color.magenta, this));
-        barriers.add(new Barrier(0, 11, Color.magenta, this));
-        barriers.add(new Barrier(0, 12, Color.magenta, this));
-        barriers.add(new Barrier(0, 13, Color.magenta, this));
-        barriers.add(new Barrier(0, 14, Color.magenta, this));
-        barriers.add(new Barrier(0, 15, Color.magenta, this));
-        barriers.add(new Barrier(0, 16, Color.magenta, this));
-        barriers.add(new Barrier(0, 17, Color.magenta, this));
-        barriers.add(new Barrier(0, 18, Color.magenta, this));
-        barriers.add(new Barrier(0, 19, Color.magenta, this));
-        barriers.add(new Barrier(1, 0, Color.magenta, this));
-        barriers.add(new Barrier(2, 0, Color.magenta, this));
-        barriers.add(new Barrier(3, 0, Color.magenta, this));
-        barriers.add(new Barrier(4, 0, Color.magenta, this));
-        barriers.add(new Barrier(5, 0, Color.magenta, this));
-        barriers.add(new Barrier(6, 0, Color.magenta, this));
-        barriers.add(new Barrier(7, 0, Color.magenta, this));
-        barriers.add(new Barrier(8, 0, Color.magenta, this));
-        barriers.add(new Barrier(9, 0, Color.magenta, this));
-        barriers.add(new Barrier(10, 0, Color.magenta, this));
-        barriers.add(new Barrier(11, 0, Color.magenta, this));
-        barriers.add(new Barrier(12, 0, Color.magenta, this));
-        barriers.add(new Barrier(13, 0, Color.magenta, this));
-        barriers.add(new Barrier(14, 0, Color.magenta, this));
-        barriers.add(new Barrier(15, 0, Color.magenta, this));
-        barriers.add(new Barrier(16, 0, Color.magenta, this));
-        barriers.add(new Barrier(17, 0, Color.magenta, this));
-        barriers.add(new Barrier(18, 0, Color.magenta, this));
-        barriers.add(new Barrier(19, 0, Color.magenta, this));
-        barriers.add(new Barrier(20, 0, Color.magenta, this));
-        barriers.add(new Barrier(21, 0, Color.magenta, this));
-        barriers.add(new Barrier(22, 0, Color.magenta, this));
-        barriers.add(new Barrier(23, 0, Color.magenta, this));
-        barriers.add(new Barrier(24, 0, Color.magenta, this));
-        barriers.add(new Barrier(24, 1, Color.magenta, this));
-        barriers.add(new Barrier(24, 2, Color.magenta, this));
-        barriers.add(new Barrier(24, 3, Color.magenta, this));
-        barriers.add(new Barrier(24, 4, Color.magenta, this));
-        barriers.add(new Barrier(24, 5, Color.magenta, this));
-        barriers.add(new Barrier(24, 6, Color.magenta, this));
-        barriers.add(new Barrier(24, 7, Color.magenta, this));
-        barriers.add(new Barrier(24, 8, Color.magenta, this));
-        barriers.add(new Barrier(24, 9, Color.magenta, this));
-        barriers.add(new Barrier(24, 10, Color.magenta, this));
-        barriers.add(new Barrier(24, 11, Color.magenta, this));
-        barriers.add(new Barrier(24, 12, Color.magenta, this));
-        barriers.add(new Barrier(24, 13, Color.magenta, this));
-        barriers.add(new Barrier(24, 14, Color.magenta, this));
-        barriers.add(new Barrier(24, 15, Color.magenta, this));
-        barriers.add(new Barrier(24, 16, Color.magenta, this));
-        barriers.add(new Barrier(24, 17, Color.magenta, this));
-        barriers.add(new Barrier(24, 18, Color.magenta, this));
-        barriers.add(new Barrier(24, 19, Color.magenta, this));
-        barriers.add(new Barrier(23, 19, Color.magenta, this));
-        barriers.add(new Barrier(22, 19, Color.magenta, this));
-        barriers.add(new Barrier(21, 19, Color.magenta, this));
-        barriers.add(new Barrier(20, 19, Color.magenta, this));
-        barriers.add(new Barrier(19, 19, Color.magenta, this));
-        barriers.add(new Barrier(18, 19, Color.magenta, this));
-        barriers.add(new Barrier(17, 19, Color.magenta, this));
-        barriers.add(new Barrier(16, 19, Color.magenta, this));
-        barriers.add(new Barrier(15, 19, Color.magenta, this));
-        barriers.add(new Barrier(14, 19, Color.magenta, this));
-        barriers.add(new Barrier(13, 19, Color.magenta, this));
-        barriers.add(new Barrier(12, 19, Color.magenta, this));
-        barriers.add(new Barrier(11, 19, Color.magenta, this));
-        barriers.add(new Barrier(10, 19, Color.magenta, this));
-        barriers.add(new Barrier(9, 19, Color.magenta, this));
-        barriers.add(new Barrier(8, 19, Color.magenta, this));
-        barriers.add(new Barrier(7, 19, Color.magenta, this));
-        barriers.add(new Barrier(6, 19, Color.magenta, this));
-        barriers.add(new Barrier(5, 19, Color.magenta, this));
-        barriers.add(new Barrier(4, 19, Color.magenta, this));
-        barriers.add(new Barrier(3, 19, Color.magenta, this));
-        barriers.add(new Barrier(2, 19, Color.magenta, this));
-        barriers.add(new Barrier(1, 19, Color.magenta, this));
+//        barriers = new ArrayList<>();
+//        barriers.add(new Barrier(0, 0, Color.magenta, this));
+//        barriers.add(new Barrier(0, 1, Color.magenta, this));
+//        barriers.add(new Barrier(0, 2, Color.magenta, this));
+//        barriers.add(new Barrier(0, 3, Color.magenta, this));
+//        barriers.add(new Barrier(0, 4, Color.magenta, this));
+//        barriers.add(new Barrier(0, 5, Color.magenta, this));
+//        barriers.add(new Barrier(0, 6, Color.magenta, this));
+//        barriers.add(new Barrier(0, 7, Color.magenta, this));
+//        barriers.add(new Barrier(0, 8, Color.magenta, this));
+//        barriers.add(new Barrier(0, 9, Color.magenta, this));
+//        barriers.add(new Barrier(0, 10, Color.magenta, this));
+//        barriers.add(new Barrier(0, 11, Color.magenta, this));
+//        barriers.add(new Barrier(0, 12, Color.magenta, this));
+//        barriers.add(new Barrier(0, 13, Color.magenta, this));
+//        barriers.add(new Barrier(0, 14, Color.magenta, this));
+//        barriers.add(new Barrier(0, 15, Color.magenta, this));
+//        barriers.add(new Barrier(0, 16, Color.magenta, this));
+//        barriers.add(new Barrier(0, 17, Color.magenta, this));
+//        barriers.add(new Barrier(0, 18, Color.magenta, this));
+//        barriers.add(new Barrier(0, 19, Color.magenta, this));
+//        barriers.add(new Barrier(1, 0, Color.magenta, this));
+//        barriers.add(new Barrier(2, 0, Color.magenta, this));
+//        barriers.add(new Barrier(3, 0, Color.magenta, this));
+//        barriers.add(new Barrier(4, 0, Color.magenta, this));
+//        barriers.add(new Barrier(5, 0, Color.magenta, this));
+//        barriers.add(new Barrier(6, 0, Color.magenta, this));
+//        barriers.add(new Barrier(7, 0, Color.magenta, this));
+//        barriers.add(new Barrier(8, 0, Color.magenta, this));
+//        barriers.add(new Barrier(9, 0, Color.magenta, this));
+//        barriers.add(new Barrier(10, 0, Color.magenta, this));
+//        barriers.add(new Barrier(11, 0, Color.magenta, this));
+//        barriers.add(new Barrier(12, 0, Color.magenta, this));
+//        barriers.add(new Barrier(13, 0, Color.magenta, this));
+//        barriers.add(new Barrier(14, 0, Color.magenta, this));
+//        barriers.add(new Barrier(15, 0, Color.magenta, this));
+//        barriers.add(new Barrier(16, 0, Color.magenta, this));
+//        barriers.add(new Barrier(17, 0, Color.magenta, this));
+//        barriers.add(new Barrier(18, 0, Color.magenta, this));
+//        barriers.add(new Barrier(19, 0, Color.magenta, this));
+//        barriers.add(new Barrier(20, 0, Color.magenta, this));
+//        barriers.add(new Barrier(21, 0, Color.magenta, this));
+//        barriers.add(new Barrier(22, 0, Color.magenta, this));
+//        barriers.add(new Barrier(23, 0, Color.magenta, this));
+//        barriers.add(new Barrier(24, 0, Color.magenta, this));
+//        barriers.add(new Barrier(24, 1, Color.magenta, this));
+//        barriers.add(new Barrier(24, 2, Color.magenta, this));
+//        barriers.add(new Barrier(24, 3, Color.magenta, this));
+//        barriers.add(new Barrier(24, 4, Color.magenta, this));
+//        barriers.add(new Barrier(24, 5, Color.magenta, this));
+//        barriers.add(new Barrier(24, 6, Color.magenta, this));
+//        barriers.add(new Barrier(24, 7, Color.magenta, this));
+//        barriers.add(new Barrier(24, 8, Color.magenta, this));
+//        barriers.add(new Barrier(24, 9, Color.magenta, this));
+//        barriers.add(new Barrier(24, 10, Color.magenta, this));
+//        barriers.add(new Barrier(24, 11, Color.magenta, this));
+//        barriers.add(new Barrier(24, 12, Color.magenta, this));
+//        barriers.add(new Barrier(24, 13, Color.magenta, this));
+//        barriers.add(new Barrier(24, 14, Color.magenta, this));
+//        barriers.add(new Barrier(24, 15, Color.magenta, this));
+//        barriers.add(new Barrier(24, 16, Color.magenta, this));
+//        barriers.add(new Barrier(24, 17, Color.magenta, this));
+//        barriers.add(new Barrier(24, 18, Color.magenta, this));
+//        barriers.add(new Barrier(24, 19, Color.magenta, this));
+//        barriers.add(new Barrier(23, 19, Color.magenta, this));
+//        barriers.add(new Barrier(22, 19, Color.magenta, this));
+//        barriers.add(new Barrier(21, 19, Color.magenta, this));
+//        barriers.add(new Barrier(20, 19, Color.magenta, this));
+//        barriers.add(new Barrier(19, 19, Color.magenta, this));
+//        barriers.add(new Barrier(18, 19, Color.magenta, this));
+//        barriers.add(new Barrier(17, 19, Color.magenta, this));
+//        barriers.add(new Barrier(16, 19, Color.magenta, this));
+//        barriers.add(new Barrier(15, 19, Color.magenta, this));
+//        barriers.add(new Barrier(14, 19, Color.magenta, this));
+//        barriers.add(new Barrier(13, 19, Color.magenta, this));
+//        barriers.add(new Barrier(12, 19, Color.magenta, this));
+//        barriers.add(new Barrier(11, 19, Color.magenta, this));
+//        barriers.add(new Barrier(10, 19, Color.magenta, this));
+//        barriers.add(new Barrier(9, 19, Color.magenta, this));
+//        barriers.add(new Barrier(8, 19, Color.magenta, this));
+//        barriers.add(new Barrier(7, 19, Color.magenta, this));
+//        barriers.add(new Barrier(6, 19, Color.magenta, this));
+//        barriers.add(new Barrier(5, 19, Color.magenta, this));
+//        barriers.add(new Barrier(4, 19, Color.magenta, this));
+//        barriers.add(new Barrier(3, 19, Color.magenta, this));
+//        barriers.add(new Barrier(2, 19, Color.magenta, this));
+//        barriers.add(new Barrier(1, 19, Color.magenta, this));
 //</editor-fold>
         
 //        background =  ResourceTools.loadImageFromResource(backgroundshark.jpg);
@@ -133,7 +139,7 @@ class Amity extends Environment implements CellDataProviderIntf, MoveValidatorIn
     
     
     int moveDelay = 0;
-    int moveDelayLimit = 3;
+    int moveDelayLimit = 5;
 
     @Override
     public void timerTaskHandler() {
@@ -147,6 +153,10 @@ class Amity extends Environment implements CellDataProviderIntf, MoveValidatorIn
             }
             
                     }
+        
+//        if (jaws.getHead = ()) {
+//            
+//        }
     }
 
     @Override
@@ -181,6 +191,10 @@ class Amity extends Environment implements CellDataProviderIntf, MoveValidatorIn
         
         else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             jaws.setDirection(Direction.DOWN);
+        }
+        
+        else if (e.getKeyCode() == KeyEvent.VK_D) {
+         //Pause
         }
     }
         
@@ -263,19 +277,23 @@ class Amity extends Environment implements CellDataProviderIntf, MoveValidatorIn
     public Point validateMove(Point proposedLocation) {
         
         if (proposedLocation.x < 0) {
-            System.out.println("YOU CROSSED THE LINE"); 
+//            System.out.println("YOU CROSSED THE LINE"); 
+            proposedLocation.x = grid.getColumns() -1;
         }
         
             else if (proposedLocation.x > 24) {
-                System.out.println("YOU CROSSED THE LINE");
+//                System.out.println("YOU CROSSED THE LINE");
+                proposedLocation.x = 0;
        }
             
          else if (proposedLocation.y < 0) {
-                System.out.println("YOU CROSSED THE LINE");
+//                System.out.println("YOU CROSSED THE LINE");
+             proposedLocation.y = grid.getRows() - 1;
        }
          
           else if (proposedLocation.y > 19) {
-                System.out.println("YOU CROSSED THE LINE");
+//                System.out.println("YOU CROSSED THE LINE");
+              proposedLocation.y = 0;
        }
             
 //        if(proposedLocation.y < grid.getRows() / 2) {

@@ -18,6 +18,8 @@ public class Shark {
      */
     public static void main(String[] args) {
         ApplicationStarter.run("Shark Game", new Amity());
+        
     }
+    
     
 }

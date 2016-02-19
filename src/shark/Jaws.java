@@ -23,6 +23,7 @@ public class Jaws {
         this.grid = grid;
         this.validator = validator;
         
+        
         //create body
         body = new ArrayList<>();
         body.add(new Point(10, 9));
@@ -36,7 +37,7 @@ public class Jaws {
     private Direction direction = Direction.RIGHT;
     private ArrayList<Point> body;
     private Grid grid;
-    private Color bodyColor = Color.BLACK;
+    private Color bodyColor = Color.WHITE;
     private final MoveValidatorIntf validator;
     private static final int HEAD_POSITION = 0;
     
