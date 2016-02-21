@@ -6,6 +6,7 @@
 package shark;
 
 import grid.Grid;
+//import images.ImageManager;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -19,10 +20,10 @@ public class Jaws {
     
     
     public Jaws(Direction direction, Grid grid, MoveValidatorIntf validator){
-        this.diection = direction;
+        this.direction = direction;
         this.grid = grid;
         this.validator = validator;
-        
+      
         
         //create body
         body = new ArrayList<>();
@@ -32,6 +33,20 @@ public class Jaws {
         body.add(new Point(8, 8));
         body.add(new Point(8, 7));
         body.add(new Point(8, 6));
+        
+        
+        
+        
+//        ImageManager im = new ImageManager();
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     private Direction direction = Direction.RIGHT;
@@ -40,6 +55,9 @@ public class Jaws {
     private Color bodyColor = Color.WHITE;
     private final MoveValidatorIntf validator;
     private static final int HEAD_POSITION = 0;
+    public boolean selfHit;
+    private boolean alive = true;
+    private Point location;
     
     public void draw(Graphics graphics) {
         graphics.setColor(getBodyColor());
@@ -73,9 +91,26 @@ public class Jaws {
 //       add new head
         getBody().add(HEAD_POSITION, validator.validateMove(newHead));
         getBody().remove(getBody().size() - 1);
+        
        
       
     }
+    
+    
+    public boolean selfHit(){
+        for (int i = 1; i < body.size(); i++) {
+            if (getHead().equals(body.get(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    
+    
+    
+    
     
     public Point getHead(){
         return getBody().get(0);
@@ -136,8 +171,27 @@ public class Jaws {
     public void setBodyColor(Color bodyColor) {
         this.bodyColor = bodyColor;
     }
+
+    /**
+     * @return the alive
+     */
+    public boolean isAlive() {
+        return alive;
+    }
+
+    /**
+     * @param alive the alive to set
+     */
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
             
+    public Point getLocation() {
+        return location;
+    }
     
-    
+    public void setLocation() {
+        this.location = location;
+    }
     
 }

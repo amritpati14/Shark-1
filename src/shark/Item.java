@@ -5,32 +5,45 @@
  */
 package shark;
 
+import images.ResourceTools;
 import java.awt.Image;
+import java.awt.Point;
 
 /**
  *
  * @author keiran
  */
 public class Item {
+
+     public Item(Point location, String type, Image image, CellDataProviderIntf cellData){
+    this.x = location.x;
+    this.y = location.y;
+    this.type = type;
+    this.image = image;
+    this.cellData = cellData;
+     }
+
+    
 //    public void draw(Graphics graphics){
 //       graphics.drawImage(),
 //        getCellData().getSystemCoordX(getX, getY()),
 //    }
-    
-    
-    
-    
-    
-    
-    public Item(int x, int y, String type, Image image, CellDataProviderIntf cellData){
-    this.x = x;
-    this.y = y;
-    this.type = type;
-    this.image = image;
-    this.cellData = cellData;
-    
-    
+    private void setImage(String type) {
+        switch (type) {
+            case Item.Item_Type_Drowning_Person:
+                image = ResourceTools.loadImageFromResource("shark/Drownee1.png");
+                break;
+        }
     }
+    
+    
+    
+    
+    
+   
+    
+    
+    
     
     
 //<editor-fold defaultstate="collapsed" desc="Properties">
@@ -42,8 +55,12 @@ public class Item {
     private String type;
     private Image image;
     private final CellDataProviderIntf cellData;
-    
 
+//    Item(int i, int i0, boolean b, String Item_Type_Drowning_Person, Amity aThis, Amity aThis0) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+    
+    
     /**
      * @return the x
      */
@@ -105,6 +122,15 @@ public class Item {
      */
     public CellDataProviderIntf getCellData() {
         return cellData;
+    }
+    
+    public Point getLocation(){
+        return new Point(x,y);
+    }
+    
+    public void setLocation(Point location){
+        this.x = location.x;
+        this.y = location.y;
     }
     
 //</editor-fold>
