@@ -9,6 +9,7 @@ import environment.Environment;
 import grid.Grid;
 import images.ResourceTools;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -39,9 +40,10 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
 
         items = new ArrayList<>();
             for (int i = 0; i < 3; i++) {
-//            items.add(new Item(getRandomGridLocation(), Item.Item_Type_Drowning_Person, this));
-                items.add(new Item(getRandomGridLocation(), Item.Item_Type_Drowning_Person, this));
-        }
+
+                items.add(new Item(getRandomGridLocation(), Item.Item_Type_Drowning_Person, drownee, this));
+        
+            }
             
         
         
@@ -175,7 +177,10 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
                 break;
 
             case ENDED:
-                graphics.drawString("GAME OVER", 200, 200);
+                
+                graphics.setFont(new Font("helvetica", Font.PLAIN, 40));
+                graphics.drawString("GAME OVER", 330, 300);
+                
 
         }
 
