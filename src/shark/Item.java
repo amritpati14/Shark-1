@@ -5,7 +5,9 @@
  */
 package shark;
 
+import grid.Grid;
 import images.ResourceTools;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 
@@ -15,12 +17,13 @@ import java.awt.Point;
  */
 public class Item {
 
-     public Item(Point location, String type, Image image, CellDataProviderIntf cellData){
-    this.x = location.x;
-    this.y = location.y;
+     public Item(Grid grid, String type, Image image, CellDataProviderIntf cellData){
+//    this.x = location.x;
+//    this.y = location.y;
     this.type = type;
     this.image = image;
     this.cellData = cellData;
+    this.grid = grid;
      }
 
     
@@ -34,6 +37,10 @@ public class Item {
                 image = ResourceTools.loadImageFromResource("shark/Drownee1.png");
                 break;
         }
+    }
+    
+    public void draw(Graphics graphics) {
+        graphics.drawImage(image, x, y, null);
     }
     
     
@@ -55,7 +62,7 @@ public class Item {
     private String type;
     private Image image;
     private final CellDataProviderIntf cellData;
-
+    private Grid grid;
 //    Item(int i, int i0, boolean b, String Item_Type_Drowning_Person, Amity aThis, Amity aThis0) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }

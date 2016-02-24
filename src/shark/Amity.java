@@ -33,7 +33,9 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
     public Amity() {
 
         this.setBackground(ResourceTools.loadImageFromResource("shark/backgroundshark.jpg").getScaledInstance(900, 600, Image.SCALE_SMOOTH));
-
+        drownee = ResourceTools.loadImageFromResource("shark/Drownee1.png").getScaledInstance(37, 37, Image.SCALE_SMOOTH);
+        
+        
         grid = new Grid(25, 20, 27, 27, new Point(80, 10), Color.black);
 
         jaws = new Jaws(Direction.RIGHT, grid, this);
@@ -41,8 +43,8 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
         items = new ArrayList<>();
             for (int i = 0; i < 3; i++) {
 
-                items.add(new Item(getRandomGridLocation(), Item.Item_Type_Drowning_Person, drownee, this));
-        
+                items.add(new Item( grid, Item.Item_Type_Drowning_Person, drownee, this));
+                
             }
             
         
@@ -54,7 +56,8 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
     }
 
     public Point getRandomGridLocation() {
-        return new Point(getRandom(0, grid.getColumns() - 1), getRandom(0, grid.getRows() - 1));
+        return new Point(getRandom(750, grid.getColumns() - 1), getRandom(520, grid.getRows() - 1));
+       
     }
 
     
@@ -164,12 +167,12 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
                     for (int i = 0; i < barriers.size(); i++) {
                         barriers.get(i).draw(graphics);
                     }
-
+                }
                     if (items != null) {
-                        for (Item items : items) {
-
+                        for (Item item : items) {
+                            item.draw(graphics);
                         }
-                    }
+                    
 
 //            barriers.draw(graphics);
                 }
