@@ -33,7 +33,7 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
     public Amity() {
 
         this.setBackground(ResourceTools.loadImageFromResource("shark/backgroundshark.jpg").getScaledInstance(900, 600, Image.SCALE_SMOOTH));
-        drownee = ResourceTools.loadImageFromResource("shark/Drownee1.png").getScaledInstance(37, 37, Image.SCALE_SMOOTH);
+        drownee = ResourceTools.loadImageFromResource("shark/Drownee1.png").getScaledInstance(40, 31, Image.SCALE_SMOOTH);
         
         
         grid = new Grid(25, 20, 27, 27, new Point(80, 10), Color.black);
@@ -41,9 +41,9 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
         jaws = new Jaws(Direction.RIGHT, grid, this);
 
         items = new ArrayList<>();
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 8; i++) {
 
-                items.add(new Item( grid, Item.Item_Type_Drowning_Person, drownee, this));
+                items.add(new Item(getRandomGridLocation(), Item.Item_Type_Drowning_Person, drownee, this));
                 
             }
             
@@ -56,7 +56,7 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
     }
 
     public Point getRandomGridLocation() {
-        return new Point(getRandom(750, grid.getColumns() - 1), getRandom(520, grid.getRows() - 1));
+        return new Point(getRandom(0, grid.getColumns() - 1), getRandom(0, grid.getRows() - 1));
        
     }
 
@@ -111,8 +111,8 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
             jaws.setDirection(Direction.RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             jaws.setDirection(Direction.DOWN);
-        } else if (e.getKeyCode() == KeyEvent.VK_D) {
-            gamestate = GameState.ENDED;
+        }else if (e.getKeyCode() == KeyEvent.VK_R) {
+            gamestate = GameState.PLAY;
         }
     }
 
@@ -201,14 +201,14 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
     }
 
     @Override
-    public int getSystemCoordX(int x, int y) {
-        return grid.getCellSystemCoordinate(x, y).x;
+    public Point getSystemCoord(int x, int y) {
+        return grid.getCellSystemCoordinate(x, y);
     }
-
-    @Override
-    public int getSystemCoordY(int x, int y) {
-        return grid.getCellSystemCoordinate(x, y).y;
-    }
+//
+//    @Override
+//    public int getSystemCoordY(int x, int y) {
+//        return grid.getCellSystemCoordinate(x, y).y;
+//    }
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="MoveValidatorIntf">
@@ -259,4 +259,7 @@ final class Amity extends Environment implements CellDataProviderIntf, MoveValid
         }
         return location;
     }
+   
+  
 }
+    

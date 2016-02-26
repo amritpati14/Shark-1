@@ -7,6 +7,7 @@ package shark;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 /**
  *
@@ -17,10 +18,10 @@ public class Barrier {
     public void draw(Graphics graphics){
         
         graphics.setColor(color);
-        graphics.fill3DRect(cellData.getSystemCoordX(x, y), 
-                cellData.getSystemCoordY(x, y), 
-                cellData.getCellWidth(), 
-                cellData.getCellHeight(), true);
+//        Point topLeft = cellData.getSystemCoord(x, y);
+//        graphics.fill3DRect(topLeft.x, topLeft.y, 
+//                cellData.getCellWidth(), 
+//                cellData.getCellHeight(), true);
         
     }
     

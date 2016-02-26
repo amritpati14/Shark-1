@@ -23,7 +23,7 @@ public class Jaws {
         this.direction = direction;
         this.grid = grid;
         this.validator = validator;
-      
+        
         
         //create body
         body = new ArrayList<>();
@@ -58,12 +58,13 @@ public class Jaws {
     public boolean selfHit;
     private boolean alive = true;
     private Point location;
+    private Jaws jaws;
     
     public void draw(Graphics graphics) {
         graphics.setColor(getBodyColor());
         for (int i = 0; i < getBody().size(); i++) {
 //            System.out.println("Body Location Equals" + body.get(i).toString());
-            graphics.fillOval(getGrid().getCellSystemCoordinate(getBody().get(i)).x, 
+            graphics.fillRect(getGrid().getCellSystemCoordinate(getBody().get(i)).x, 
                     getGrid().getCellSystemCoordinate(getBody().get(i)).y, 
                     getGrid().getCellWidth(), 
                     getGrid().getCellHeight());
@@ -92,6 +93,7 @@ public class Jaws {
         getBody().add(HEAD_POSITION, validator.validateMove(newHead));
         getBody().remove(getBody().size() - 1);
         
+        
        
       
     }
@@ -106,7 +108,19 @@ public class Jaws {
         return false;
     }
     
-    
+//    public Point checkIntersection(Point location){
+//        if (jaws != null){
+//            if (jaws.getLocation().equals(Item.Item_Type_Drowning_Person)){
+//                return location;
+//            }
+//            else if (1 !=  0){
+//                 getBody().remove(getBody().size() - 1);
+//            }
+//        }
+//         
+//          
+//           return location;
+//    }
     
     
     
